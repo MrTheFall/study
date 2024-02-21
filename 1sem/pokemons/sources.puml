@@ -1,0 +1,131 @@
+@startuml
+scale max 4000 width
+class Main {
++static void main(String[] args)
+}
+Main --down[#AAA]-o mypokemons.Sealeo
+Main -down[#AAA]--o mypokemons.Skarmory
+Main -down[#AAA]-o mypokemons.Houndour
+Main -down[#AAA]--o mypokemons.Oddish
+Main -down[#AAA]-o mypokemons.Gloom
+Main --down[#AAA]-o mypokemons.Totodile
+
+class utils.Utils {
++static boolean chance(double chance)
+}
+
+
+class mypokemons.Gloom extends Pokemon {
++Gloom(String name, int level)
+}
+mypokemons.Gloom -down[#AAA]--o mymoves.LightScreen
+mypokemons.Gloom -down[#AAA]-o mymoves.HydroPump
+mypokemons.Gloom -down[#AAA]--o mymoves.Charge
+
+class mypokemons.Houndour extends Pokemon {
++Houndour(String name, int level)
+}
+mypokemons.Houndour -down[#AAA]-o mymoves.HydroPump
+mypokemons.Houndour --down[#AAA]-o mymoves.ThunderShock
+mypokemons.Houndour -down[#AAA]--o mymoves.Endeavor
+mypokemons.Houndour -down[#AAA]-o mymoves.Bite
+
+class mypokemons.Oddish extends Pokemon {
++Oddish(String name, int level)
+}
+mypokemons.Oddish -down[#AAA]--o mymoves.LightScreen
+mypokemons.Oddish -down[#AAA]-o mymoves.HydroPump
+
+class mypokemons.Sealeo extends Pokemon {
++Sealeo(String name, int level)
+}
+mypokemons.Sealeo --down[#AAA]-o mymoves.DoubleEdge
+mypokemons.Sealeo -down[#AAA]--o mymoves.Endeavor
+mypokemons.Sealeo -down[#AAA]-o mymoves.Substitute
+mypokemons.Sealeo -down[#AAA]--o mymoves.TakeDown
+
+class mypokemons.Skarmory extends Pokemon {
++Skarmory(String name, int level)
+}
+mypokemons.Skarmory -down[#AAA]-o mymoves.HydroPump
+mypokemons.Skarmory --down[#AAA]-o mymoves.ThunderShock
+mypokemons.Skarmory -down[#AAA]--o mymoves.Endeavor
+
+class mypokemons.Totodile extends Pokemon {
++Totodile(String name, int level)
+}
+mypokemons.Totodile -down[#AAA]-o mymoves.LightScreen
+mypokemons.Totodile -down[#AAA]--o mymoves.HydroPump
+mypokemons.Totodile -down[#AAA]-o mymoves.Charge
+mypokemons.Totodile --down[#AAA]-o mymoves.Meditate
+
+class mymoves.Bite extends PhysicalMove {
++Bite()
+#void applyOppDamage(Pokemon def, double damage)
+#String describe()
+}
+
+
+class mymoves.Charge extends PhysicalMove {
++Charge()
+#void applySelfEffects(Pokemon p)
+#String describe()
+}
+
+
+class mymoves.DoubleEdge extends PhysicalMove {
++DoubleEdge()
+#void applySelfDamage(Pokemon p, double damage)
+#String describe()
+}
+
+
+class mymoves.Endeavor extends PhysicalMove {
++Endeavor()
+#double calcBaseDamage(Pokemon att, Pokemon def)
+#String describe()
+}
+
+
+class mymoves.HydroPump extends PhysicalMove {
++HydroPump()
+#String describe()
+}
+
+
+class mymoves.LightScreen extends PhysicalMove {
++LightScreen()
+#void applySelfEffects(Pokemon p)
+#String describe()
+}
+
+
+class mymoves.Meditate extends PhysicalMove {
++Meditate()
+#void applySelfEffects(Pokemon p)
+#String describe()
+}
+
+
+class mymoves.Substitute extends PhysicalMove {
++Substitute()
+#void applySelfDamage(Pokemon p, double damage)
+#String describe()
+}
+
+
+class mymoves.TakeDown extends PhysicalMove {
++TakeDown()
+#void applySelfDamage(Pokemon p, double damage)
+#String describe()
+}
+
+
+class mymoves.ThunderShock extends SpecialMove {
++ThunderShock ()
+#void applyOppEffects(Pokemon p)
+#String describe ()
+}
+
+
+@enduml

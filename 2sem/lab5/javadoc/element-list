@@ -1,0 +1,8 @@
+org.lab5
+org.lab5.commands
+org.lab5.exceptions
+org.lab5.managers
+org.lab5.models
+org.lab5.utils
+org.lab5.utils.adapters
+org.lab5.utils.console

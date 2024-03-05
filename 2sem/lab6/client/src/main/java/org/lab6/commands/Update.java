@@ -1,6 +1,5 @@
 package org.lab6.commands;
 
-import common.exceptions.APIException;
 import common.network.requests.UpdateRequest;
 import common.network.responses.UpdateResponse;
 import org.lab6.network.TCPClient;

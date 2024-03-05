@@ -1,11 +1,8 @@
 package org.lab6.commands;
 
 import common.exceptions.APIException;
-import common.network.requests.ShowRequest;
 import common.network.requests.SortRequest;
-import common.network.responses.ShowResponse;
 import common.network.responses.SortResponse;
-import org.lab6.managers.CollectionManager;
 import org.lab6.network.TCPClient;
 import org.lab6.utils.ExecutionResponse;
 import org.lab6.utils.console.Console;

@@ -1,6 +1,5 @@
 package org.lab6.commands;
 
-import common.network.requests.HelpRequest;
 import common.network.requests.PrintUniqueColorRequest;
 import common.network.requests.Request;
 import common.network.responses.PrintUniqueColorResponse;

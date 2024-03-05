@@ -48,11 +48,11 @@ public class Person implements Serializable {
     @Override
     public String toString() {
         String info = "";
-        info += "Имя: " + name;
-        info += "\n Дата рождения: " + birthday;
-        info += "\n Рост: " + height;
-        info += "\n Вес: " + weight;
-        info += "\n Местоположение: " + location;
+        info += "\n  Имя: " + name;
+        info += "\n  Дата рождения: " + birthday;
+        info += "\n  Рост: " + height;
+        info += "\n  Вес: " + weight;
+        info += "\n  Местоположение: " + location;
         return info;
     }
 }

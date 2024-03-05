@@ -1,9 +1,5 @@
 package org.lab6;
 
-import org.lab6.commands.*;
-import org.lab6.managers.CollectionManager;
-import org.lab6.managers.CommandManager;
-import org.lab6.managers.DumpManager;
 import org.lab6.network.TCPClient;
 import org.lab6.utils.Runner;
 import org.lab6.utils.console.StandardConsole;
@@ -27,7 +23,7 @@ public class Main {
             new Runner(console, client).interactiveMode();
         }catch (ConnectException e){
             logger.error("Сервер недоступен");
-        } catch (IOException e) {
+        } catch (IOException | RuntimeException e) {
             logger.error(e);
         }
     }

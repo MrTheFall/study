@@ -40,13 +40,11 @@ public class TCPClient {
     }
 
     private void sendData(byte[] data) throws IOException {
-        // Send the size of data first
         ByteBuffer sizeBuffer = ByteBuffer.allocate(Integer.BYTES);
         sizeBuffer.putInt(data.length);
         sizeBuffer.flip();
         client.write(sizeBuffer);
 
-        // Send the actual data
         ByteBuffer dataBuffer = ByteBuffer.wrap(data);
         while (dataBuffer.hasRemaining()) {
             client.write(dataBuffer);
@@ -56,7 +54,6 @@ public class TCPClient {
     }
 
     private byte[] receiveData() throws IOException {
-        // Read the size of data
         ByteBuffer sizeBuffer = ByteBuffer.allocate(Integer.BYTES);
         while (sizeBuffer.hasRemaining()) {
             client.read(sizeBuffer);
@@ -64,7 +61,6 @@ public class TCPClient {
         sizeBuffer.flip();
         int size = sizeBuffer.getInt();
 
-        // Read the actual data
         ByteBuffer dataBuffer = ByteBuffer.allocate(size);
         while (dataBuffer.hasRemaining()) {
             client.read(dataBuffer);

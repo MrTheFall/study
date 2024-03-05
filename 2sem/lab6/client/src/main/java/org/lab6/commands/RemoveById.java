@@ -1,12 +1,8 @@
 package org.lab6.commands;
 
 import common.network.requests.RemoveByIdRequest;
-import common.network.requests.UpdateRequest;
 import common.network.responses.RemoveByIdResponse;
-import common.network.responses.UpdateResponse;
-import org.lab6.managers.CollectionManager;
 import org.lab6.network.TCPClient;
-import org.lab6.utils.Ask;
 import org.lab6.utils.ExecutionResponse;
 import org.lab6.utils.console.Console;
 

@@ -5,7 +5,6 @@ import common.network.requests.ShowRequest;
 import common.network.responses.ShowResponse;
 import common.network.responses.Response;
 import org.lab6.managers.CollectionManager;
-import org.lab6.utils.ExecutionResponse;
 import org.lab6.utils.console.Console;
 
 /**

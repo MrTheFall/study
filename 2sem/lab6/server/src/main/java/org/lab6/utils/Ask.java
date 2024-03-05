@@ -1,6 +1,6 @@
 package org.lab6.utils;
 
-import org.lab6.models.*;
+import common.models.*;
 import org.lab6.utils.console.Console;
 
 import java.util.NoSuchElementException;

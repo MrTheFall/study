@@ -4,12 +4,8 @@ import common.network.requests.InsertRequest;
 import common.network.requests.Request;
 import common.network.responses.InsertResponse;
 import common.network.responses.Response;
-import common.network.responses.UpdateResponse;
 import org.lab6.managers.CollectionManager;
-import org.lab6.models.Dragon;
-import org.lab6.utils.ExecutionResponse;
 import org.lab6.utils.console.Console;
-import org.lab6.utils.Ask;
 
 /**
  * Команда 'insert'. Вставляет новый элемент в заданное место коллекции.

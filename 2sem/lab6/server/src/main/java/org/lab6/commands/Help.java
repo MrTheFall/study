@@ -5,7 +5,6 @@ import common.network.requests.Request;
 import common.network.responses.HelpResponse;
 import common.network.responses.Response;
 import org.lab6.managers.CommandManager;
-import org.lab6.utils.ExecutionResponse;
 import org.lab6.utils.console.Console;
 
 import java.util.HashMap;

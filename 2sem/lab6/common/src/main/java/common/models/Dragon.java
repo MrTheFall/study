@@ -179,13 +179,13 @@ public class Dragon extends Element implements Comparable<Dragon>, Serializable 
         String info = "";
         info += "Дракон №" + id;
         info += " (добавлен " + creationDate.toString() + ")";
-        info += "\n имя: " + name;
+        info += "\n Имя: " + name;
         info += "\n Местоположение: " + coordinates;
         info += "\n Возраст: " + age;
         info += "\n Говорящий?: " +  ((speaking == null) ? null : "'" + speaking.toString() + "'");
         info += "\n Цвет: " + color;
         info += "\n Характер: " + character;
-        info += "\n Убийца дракона:" + ((killer == null) ? null : "'" + killer.toString() + "'");
+        info += "\n Убийца дракона:" + ((killer == null) ? null : killer.toString());
         return info;
     }
 }

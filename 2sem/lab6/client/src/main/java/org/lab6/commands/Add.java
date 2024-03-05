@@ -3,7 +3,6 @@ package org.lab6.commands;
 import common.exceptions.APIException;
 import common.network.requests.AddRequest;
 import common.network.responses.AddResponse;
-import org.lab6.managers.CollectionManager;
 import common.models.Dragon;
 import org.lab6.network.TCPClient;
 import org.lab6.utils.ExecutionResponse;

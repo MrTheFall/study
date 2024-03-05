@@ -8,7 +8,6 @@ import org.lab6.managers.CollectionManager;
 import org.lab6.managers.CommandManager;
 import org.lab6.managers.DumpManager;
 import org.lab6.managers.TCPServer;
-//import org.lab6.utils.Runner;
 import org.lab6.utils.console.StandardConsole;
 
 import java.io.IOException;

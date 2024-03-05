@@ -2,19 +2,12 @@ package org.lab6.commands;
 
 import common.exceptions.APIException;
 import common.network.requests.GroupCountingByCreationDateRequest;
-import common.network.requests.ShowRequest;
 import common.network.responses.GroupCountingByCreationDateResponse;
-import common.network.responses.ShowResponse;
-import org.lab6.managers.CollectionManager;
-import common.models.Dragon;
 import org.lab6.network.TCPClient;
 import org.lab6.utils.ExecutionResponse;
 import org.lab6.utils.console.Console;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Команда 'group_counting_by_creation_date'. Группирует элементы коллекции по дате создания.

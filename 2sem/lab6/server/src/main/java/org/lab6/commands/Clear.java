@@ -2,7 +2,6 @@ package org.lab6.commands;
 
 import common.network.requests.ClearRequest;
 import common.network.requests.Request;
-import common.network.requests.ShowRequest;
 import common.network.responses.ClearResponse;
 import common.network.responses.Response;
 import org.apache.logging.log4j.Logger;

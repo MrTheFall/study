@@ -1,6 +1,5 @@
 package common.network.responses;
 
-import common.models.Dragon;
 import common.utils.Commands;
 
 import java.util.Vector;

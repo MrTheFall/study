@@ -5,9 +5,7 @@ import common.network.requests.Request;
 import common.network.responses.AddResponse;
 import common.network.responses.Response;
 import org.lab6.managers.CollectionManager;
-import common.models.Dragon;
 import org.lab6.utils.console.Console;
-import org.lab6.utils.Ask;
 
 /**
  * Команда 'add'. Добавляет новый элемент в коллекцию.

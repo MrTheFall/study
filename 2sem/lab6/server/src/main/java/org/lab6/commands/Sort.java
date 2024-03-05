@@ -4,7 +4,6 @@ import common.network.requests.Request;
 import common.network.responses.Response;
 import common.network.responses.SortResponse;
 import org.lab6.managers.CollectionManager;
-import org.lab6.utils.ExecutionResponse;
 import org.lab6.utils.console.Console;
 
 /**

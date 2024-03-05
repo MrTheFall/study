@@ -1,14 +1,10 @@
 package org.lab6.commands;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 
 import common.exceptions.APIException;
 import common.network.requests.InfoRequest;
-import common.network.requests.ShowRequest;
 import common.network.responses.InfoResponse;
-import common.network.responses.ShowResponse;
-import org.lab6.managers.CollectionManager;
 import org.lab6.network.TCPClient;
 import org.lab6.utils.ExecutionResponse;
 import org.lab6.utils.console.Console;

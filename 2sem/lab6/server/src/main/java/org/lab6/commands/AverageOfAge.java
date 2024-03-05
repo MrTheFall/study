@@ -2,7 +2,6 @@ package org.lab6.commands;
 
 import common.network.requests.AverageOfAgeRequest;
 import common.network.requests.Request;
-import common.network.requests.ShowRequest;
 import common.network.responses.AverageOfAgeResponse;
 import common.network.responses.Response;
 import org.lab6.managers.CollectionManager;

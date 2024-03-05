@@ -1,9 +1,5 @@
 package common.network.responses;
 
-
-//collectionManager.collectionType(), collectionManager.collectionSize(), lastSaveTimeString, lastInitTimeString
-
-import common.models.Dragon;
 import common.utils.Commands;
 
 public class InfoResponse extends Response {

@@ -1,7 +1,9 @@
 package org.lab6.managers;
 
+import common.models.Dragon;
 import common.network.requests.Request;
 import common.network.responses.Response;
+import common.network.responses.ShowResponse;
 import org.apache.commons.lang3.SerializationException;
 import org.apache.logging.log4j.Logger;
 
@@ -15,6 +17,8 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * TCP обработчик запросов
@@ -82,6 +86,18 @@ public class TCPServer {
                         // Serialize and send the response to client
                         byte[] responseData;
                         try {
+                            if (response instanceof ShowResponse showResponse) {
+                                logger.error(showResponse.dragons);
+                                Collections.sort(showResponse.dragons, new Comparator<Dragon>() {
+                                    @Override
+                                    public int compare(Dragon d1, Dragon d2) {
+                                        int size1 = SerializationUtils.serialize(d1).length;
+                                        int size2 = SerializationUtils.serialize(d2).length;
+                                        return Integer.compare(size1, size2);
+                                    }
+                                });
+                            }
+
                             responseData = SerializationUtils.serialize(response);
                             output.writeInt(responseData.length);
                             output.write(responseData);
@@ -117,8 +133,8 @@ public class TCPServer {
     }
 
     /**
-     * Sets a hook to be called after each request.
-     * @param afterHook the hook to be executed after each request.
+     * Устанавливает хук для вызова функции после каждого запроса.
+     * @param afterHook функция которая будет запущена после каждого запроса.
      */
     public void setAfterHook(Runnable afterHook) {
         this.afterHook = afterHook;

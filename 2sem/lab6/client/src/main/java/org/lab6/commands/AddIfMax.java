@@ -1,26 +1,33 @@
-package org.lab5.commands;
+package org.lab6.commands;
 
-import org.lab5.managers.CollectionManager;
-import org.lab5.models.Dragon;
-import org.lab5.utils.Ask;
-import org.lab5.utils.ExecutionResponse;
-import org.lab5.utils.console.Console;
+import common.exceptions.APIException;
+import common.models.Dragon;
+import common.network.requests.AddIfMaxRequest;
+import common.network.requests.AddRequest;
+import common.network.responses.AddIfMaxResponse;
+import common.network.responses.AddResponse;
+import org.lab6.utils.Ask;
+import org.lab6.utils.ExecutionResponse;
+import org.lab6.utils.console.Console;
+import org.lab6.network.TCPClient;
+
+import java.io.IOException;
 
 /**
  * Команда 'add_if_max'. Добавляет новый элемент в коллекцию, если его значение превышает значение наибольшего элемента этой коллекции.
  */
 public class AddIfMax extends Command {
     private final Console console;
-    private final CollectionManager collectionManager;
+    private final TCPClient client;
 
     /**
      * @param console
-     * @param collectionManager
+     * @param client
      */
-    public AddIfMax(Console console, CollectionManager collectionManager) {
+    public AddIfMax(Console console, TCPClient client) {
         super("add_if_max {element}", "добавить новый элемент в коллекцию, если его значение превышает значение наибольшего элемента этой коллекции");
         this.console = console;
-        this.collectionManager = collectionManager;
+        this.client = client;
     }
 
     /**
@@ -36,25 +43,24 @@ public class AddIfMax extends Command {
                         "Неправильное количество аргументов!\nИспользование: '" + getName() + "'");
             }
             console.println("* Создание нового продукта (add_if_max):");
-            Dragon dragon = Ask.askDragon(console, collectionManager.getFreeId());
-            int maxAge = maxAge();
-            if (maxAge == -1 || dragon.getAge() > maxAge) {
-                collectionManager.add(dragon);
+            Dragon dragon = Ask.askDragon(console);
+            if (dragon != null && dragon.validate()) {
+                var response = (AddIfMaxResponse) client.sendAndReceiveCommand(new AddIfMaxRequest(dragon));
+                if (!response.isAdded){
+                    console.println("Дракон не был добавлен: " + response.getError());
+                    return new ExecutionResponse(false, "Дракон не был добавлен: " + response.getError());
+                }
+                if (response.getError() != null && !response.getError().isEmpty()) {
+                    throw new APIException(response.getError());
+                }
                 console.println("Дракон успешно добавлен!");
-            } else {
-                console.println("Дракон не добавлен, его возрасть не превышает возраст самого старого дракона (" + dragon.getAge() + " < " + maxAge + ")");
+                return new ExecutionResponse("Дракон успешно добавлен!");
             }
             return new ExecutionResponse(true, "Дракон успешно добавлен!");
         } catch (Ask.AskBreak e) {
             return new ExecutionResponse(false, "Отмена...");
+        } catch (APIException | IOException e) {
+            throw new RuntimeException(e);
         }
-    }
-
-    private int maxAge() {
-        return collectionManager.getCollection().stream()
-                .map(Dragon::getAge)
-                .mapToInt(Integer::intValue)
-                .max()
-                .orElse(-1);
     }
 }

@@ -28,8 +28,7 @@ public class TCPServer {
     private final CommandHandler commandHandler;
     private Runnable afterHook;
 
-    private final Logger logger = Main.logger; // Ensure this logger is initialized properly
-
+    private final Logger logger = Main.logger;
     private boolean running = true;
 
     public TCPServer(int port, CommandHandler commandHandler) throws IOException {
@@ -50,9 +49,7 @@ public class TCPServer {
                 DataInputStream input = new DataInputStream(clientSocket.getInputStream());
                 DataOutputStream output = new DataOutputStream(clientSocket.getOutputStream());
 
-                // Keep the connection alive to handle multiple requests
                 while (running && !clientSocket.isClosed()) {
-                    // Read the length of the incoming message
                     int length;
                     try {
                         length = input.readInt();
@@ -64,14 +61,12 @@ public class TCPServer {
                         break;
                     }
 
-                    // If length is greater than 0, process the request
                     if (length > 0) {
                         byte[] message = new byte[length];
                         input.readFully(message, 0, message.length);
                         Request request = null;
                         Response response = null;
 
-                        // Deserialize the request and process it
                         try {
                             request = SerializationUtils.deserialize(message);
                             logger.info("Processing request: " + request);
@@ -83,7 +78,6 @@ public class TCPServer {
                             if (afterHook != null) afterHook.run();
                         }
 
-                        // Serialize and send the response to client
                         byte[] responseData;
                         try {
                             if (response instanceof ShowResponse showResponse) {
@@ -141,7 +135,7 @@ public class TCPServer {
     }
 
     public void stop() {
-        running = false; // Add flag check in while loop for proper shutdown
+        running = false;
         try {
             serverSocket.close();
         } catch (IOException e) {

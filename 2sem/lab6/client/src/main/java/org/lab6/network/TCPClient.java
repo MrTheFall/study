@@ -26,7 +26,7 @@ public class TCPClient {
         this.client.finishConnect();
         this.client.configureBlocking(false);
 
-        logger.info("SocketChannel opened connection to " + serverAddress + client.isConnected());
+        logger.info("SocketChannel opened connection to " + serverAddress);
     }
 
     public Response sendAndReceiveCommand(Request request) throws IOException {

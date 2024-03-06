@@ -1,8 +1,7 @@
 package org.lab6.handlers;
 
-import common.network.requests.Request;
-import common.network.responses.Response;
-import common.network.responses.NoSuchCommandResponse;
+import common.network.Request;
+import common.network.Response;
 import org.lab6.managers.CommandManager;
 
 public class CommandHandler {
@@ -13,8 +12,8 @@ public class CommandHandler {
     }
 
     public Response handle(Request request) {
-        var command = manager.getCommands().get(request.getName());
-        if (command == null) return new NoSuchCommandResponse(request.getName());
+        var command = manager.getCommands().get(request.getCommand());
+        if (command == null) return new Response(false, "No such command: "+ request.getCommand(), null);
         return command.apply(request);
     }
 }

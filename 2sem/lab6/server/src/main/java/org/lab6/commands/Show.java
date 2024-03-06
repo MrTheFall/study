@@ -1,9 +1,7 @@
 package org.lab6.commands;
 
-import common.network.requests.Request;
-import common.network.requests.ShowRequest;
-import common.network.responses.ShowResponse;
-import common.network.responses.Response;
+import common.network.Request;
+import common.network.Response;
 import org.lab6.managers.CollectionManager;
 import org.lab6.utils.console.Console;
 
@@ -26,11 +24,10 @@ public class Show extends Command {
      */
     @Override
     public Response apply(Request request) {
-        var req = (ShowRequest) request;
         try {
-            return new ShowResponse(collectionManager.getCollection(), null);
+            return new Response(true, null, collectionManager.getCollection());
         } catch (Exception e) {
-            return new ShowResponse(null, e.toString());
+            return new Response(false, e.toString(), null);
         }
     }
 }

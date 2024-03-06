@@ -38,21 +38,21 @@ public class Runner {
         this.client = client;
         this.console = console;
         this.commandManager = new CommandManager() {{
-            register("help", new Help(console, client));
-            register("info", new Info(console, client));
-            register("add", new Add(console, client));
-            register("update", new Update(console, client));
-            register("remove_by_id", new RemoveById(console, client));
-            register("clear", new Clear(console, client));
+//            register("help", new Help(console, client));
+//            register("info", new Info(console, client));
+//            register("add", new Add(console, client));
+//            register("update", new Update(console, client));
+//            register("remove_by_id", new RemoveById(console, client));
+//            register("clear", new Clear(console, client));
             register("show", new Show(console, client));
             register("execute_script", new ExecuteScript(console));
             register("exit", new Exit(console));
-            register("add_if_max", new AddIfMax(console, client));
-            register("insert", new Insert(console, client));
-            register("sort", new Sort(console, client));
-            register("average_of_age", new AverageOfAge(console, client));
-            register("group_counting_by_creation_date", new GroupCountingByCreationDate(console, client));
-            register("print_unique_color", new PrintUniqueColor(console, client));
+//            register("add_if_max", new AddIfMax(console, client));
+//            register("insert", new Insert(console, client));
+//            register("sort", new Sort(console, client));
+//            register("average_of_age", new AverageOfAge(console, client));
+//            register("group_counting_by_creation_date", new GroupCountingByCreationDate(console, client));
+//            register("print_unique_color", new PrintUniqueColor(console, client));
         }};
     }
 

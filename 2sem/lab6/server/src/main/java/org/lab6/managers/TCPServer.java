@@ -1,22 +1,16 @@
 package org.lab6.managers;
 
 import common.models.Dragon;
-import common.network.requests.Request;
-import common.network.responses.Response;
-import common.network.responses.ShowResponse;
-import org.apache.commons.lang3.SerializationException;
-import org.apache.logging.log4j.Logger;
-
+import common.network.Request;
+import common.network.Response;
 import org.apache.commons.lang3.SerializationUtils;
+import org.apache.logging.log4j.Logger;
 import org.lab6.Main;
-
-import common.network.responses.NoSuchCommandResponse;
 import org.lab6.handlers.CommandHandler;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketException;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -40,94 +34,64 @@ public class TCPServer {
         logger.info("TCP Server started on port " + serverSocket.getLocalPort());
 
         while (running) {
-            Socket clientSocket = null;
-            try {
-                clientSocket = serverSocket.accept();
+            try (Socket clientSocket = serverSocket.accept();
+                 ObjectOutputStream output = new ObjectOutputStream(clientSocket.getOutputStream());
+                 ObjectInputStream input = new ObjectInputStream(clientSocket.getInputStream())) {
 
                 logger.info("Client connected from " + clientSocket.getRemoteSocketAddress());
 
-                DataInputStream input = new DataInputStream(clientSocket.getInputStream());
-                DataOutputStream output = new DataOutputStream(clientSocket.getOutputStream());
-
                 while (running && !clientSocket.isClosed()) {
-                    int length;
+                    Request request = null;
+                    Response response = null;
+
                     try {
-                        length = input.readInt();
-                    } catch (EOFException e) {
-                        logger.info("Client disconnected gracefully.");
-                        break;
-                    } catch (SocketException e) {
-                        logger.info("Client connection was reset.");
-                        break;
+                        request = (Request) input.readObject();
+                        logger.info("Processing request: " + request);
+
+                        response = commandHandler.handle(request);
+                        if (request.getCommand().equals("show")) {
+                            logger.error(response.getDragons());
+                            Collections.sort(response.getDragons(), new Comparator<Dragon>() {
+                                @Override
+                                public int compare(Dragon d1, Dragon d2) {
+                                    int size1 = SerializationUtils.serialize(d1).length;
+                                    int size2 = SerializationUtils.serialize(d2).length;
+                                    return Integer.compare(size1, size2);
+                                }
+                            });
+                        }
+                    } catch (ClassNotFoundException | IOException e) {
+                        logger.error("Error while receiving the request: " + e.getMessage(), e);
+                        response = new Response(false, "Failed to process request: " + (request != null ? request.getCommand() : "unknown"), null);
+                    } finally {
+                        if (afterHook != null) afterHook.run();
                     }
 
-                    if (length > 0) {
-                        byte[] message = new byte[length];
-                        input.readFully(message, 0, message.length);
-                        Request request = null;
-                        Response response = null;
-
-                        try {
-                            request = SerializationUtils.deserialize(message);
-                            logger.info("Processing request: " + request);
-                            response = commandHandler.handle(request);
-                        } catch (SerializationException e) {
-                            logger.error("Error while handling the request: " + e.toString(), e);
-                            response = new NoSuchCommandResponse(request != null ? request.getName() : "unknown");
-                        } finally {
-                            if (afterHook != null) afterHook.run();
-                        }
-
-                        byte[] responseData;
-                        try {
-                            if (response instanceof ShowResponse showResponse) {
-                                logger.error(showResponse.dragons);
-                                Collections.sort(showResponse.dragons, new Comparator<Dragon>() {
-                                    @Override
-                                    public int compare(Dragon d1, Dragon d2) {
-                                        int size1 = SerializationUtils.serialize(d1).length;
-                                        int size2 = SerializationUtils.serialize(d2).length;
-                                        return Integer.compare(size1, size2);
-                                    }
-                                });
-                            }
-
-                            responseData = SerializationUtils.serialize(response);
-                            output.writeInt(responseData.length);
-                            output.write(responseData);
-                            output.flush();
-                            logger.info("Response sent to client");
-                        } catch (IOException e) {
-                            logger.error("Error sending response to client: " + e.toString(), e);
-                        }
-                    } else {
-                        logger.error("No data or incorrect data received from client.");
+                    try {
+                        output.writeObject(response);
+                        output.flush();
+                        logger.info("Response sent to client");
+                    } catch (IOException e) {
+                        logger.error("Error sending response to client: " + e.getMessage(), e);
                     }
                 }
             } catch (IOException e) {
-                logger.error("Error handling client connection: " + e.toString(), e);
-            } finally {
-                // Disconnection moved to the while-loop break condition
-                if (clientSocket != null && !clientSocket.isClosed()) {
-                    try {
-                        clientSocket.close();
-                    } catch (IOException e) {
-                        logger.error("Failed to close client socket: " + e.toString(), e);
-                    }
+                if (running) {
+                    logger.error("Error handling client connection: " + e.getMessage(), e);
                 }
             }
         }
 
-        // Close server socket
         try {
             serverSocket.close();
         } catch (IOException e) {
-            logger.error("Failed to close server socket: " + e.toString(), e);
+            logger.error("Failed to close server socket: " + e.getMessage(), e);
         }
     }
 
     /**
      * Устанавливает хук для вызова функции после каждого запроса.
+     *
      * @param afterHook функция которая будет запущена после каждого запроса.
      */
     public void setAfterHook(Runnable afterHook) {
@@ -139,8 +103,7 @@ public class TCPServer {
         try {
             serverSocket.close();
         } catch (IOException e) {
-            logger.error("Failed to close server socket when stopping: " + e.toString(), e);
+            logger.error("Failed to close server socket when stopping: " + e.getMessage(), e);
         }
     }
 }
-

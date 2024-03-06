@@ -1,7 +1,7 @@
 package org.lab6.commands;
 
-import common.network.requests.Request;
-import common.network.responses.Response;
+import common.network.Request;
+import common.network.Response;
 
 
 /**

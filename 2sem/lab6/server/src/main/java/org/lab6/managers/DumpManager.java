@@ -46,7 +46,7 @@ public class DumpManager {
     public void writeCollection(Collection<Dragon> collection) {
         try (OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(new File(fileName)), StandardCharsets.UTF_8)) {
             writer.write(gson.toJson(collection));
-            console.println("Коллекция успешна сохранена в файл!");
+            console.println("Коллекция успешно сохранена в файл!");
         } catch (IOException exception) {
             console.printError("Загрузочный файл не может быть открыт!");
         }

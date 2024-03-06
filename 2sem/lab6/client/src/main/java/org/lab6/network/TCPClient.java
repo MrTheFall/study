@@ -1,70 +1,62 @@
 package org.lab6.network;
 
 import org.lab6.Main;
-import common.network.responses.Response;
-import common.network.requests.Request;
+import common.network.Response;
+import common.network.Request;
 
-import org.apache.commons.lang3.SerializationUtils;
 import org.apache.logging.log4j.Logger;
+import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
-import java.nio.ByteBuffer;
+import java.nio.channels.Channels;
 import java.nio.channels.SocketChannel;
+import java.nio.ByteBuffer;
+import java.io.ObjectOutputStream;
+import java.io.ObjectInputStream;
 
 public class TCPClient {
+
     private final SocketChannel client;
     private final InetSocketAddress serverAddress;
+    private ObjectOutputStream outputStream;
+    private ObjectInputStream inputStream;
 
-    private final Logger logger = Main.logger;
+    private final Logger logger = getLogger(Main.class); // This is an example of how you would typically get the logger via LogManager
 
     public TCPClient(InetAddress hostname, int port) throws IOException {
         this.serverAddress = new InetSocketAddress(hostname, port);
         this.client = SocketChannel.open();
         this.client.connect(serverAddress);
-        this.client.finishConnect();
-        this.client.configureBlocking(false);
+
+        // Prepare the streams
+        outputStream = new ObjectOutputStream(Channels.newOutputStream(client));
+        inputStream = new ObjectInputStream(Channels.newInputStream(client));
 
         logger.info("SocketChannel opened connection to " + serverAddress);
     }
 
-    public Response sendAndReceiveCommand(Request request) throws IOException {
-        var requestData = SerializationUtils.serialize(request);
-        sendData(requestData);
+    public Response sendAndReceiveCommand(Request request) throws IOException, ClassNotFoundException {
+        outputStream.writeObject(request);
+        outputStream.flush();
 
-        var responseData = receiveData();
-        Response response = SerializationUtils.deserialize(responseData);
+        Response response = (Response)inputStream.readObject();
+
         logger.info("Received response from server: " + response);
         return response;
     }
 
-    private void sendData(byte[] data) throws IOException {
-        ByteBuffer sizeBuffer = ByteBuffer.allocate(Integer.BYTES);
-        sizeBuffer.putInt(data.length);
-        sizeBuffer.flip();
-        client.write(sizeBuffer);
-
-        ByteBuffer dataBuffer = ByteBuffer.wrap(data);
-        while (dataBuffer.hasRemaining()) {
-            client.write(dataBuffer);
+    public void close() throws IOException {
+        if (outputStream != null) {
+            outputStream.close();
         }
-
-        logger.info("Data sent to server.");
-    }
-
-    private byte[] receiveData() throws IOException {
-        ByteBuffer sizeBuffer = ByteBuffer.allocate(Integer.BYTES);
-        while (sizeBuffer.hasRemaining()) {
-            client.read(sizeBuffer);
+        if (inputStream != null) {
+            inputStream.close();
         }
-        sizeBuffer.flip();
-        int size = sizeBuffer.getInt();
-
-        ByteBuffer dataBuffer = ByteBuffer.allocate(size);
-        while (dataBuffer.hasRemaining()) {
-            client.read(dataBuffer);
+        if (client != null) {
+            client.close();
         }
-        return dataBuffer.array();
+        logger.info("Connection to server " + serverAddress + " closed.");
     }
 }

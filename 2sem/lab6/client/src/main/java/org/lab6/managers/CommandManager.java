@@ -1,8 +1,15 @@
 package org.lab6.managers;
 
 
-import org.lab6.commands.Command;
+import common.network.Request;
+import common.network.Response;
+import common.utils.ArgumentType;
+import common.utils.Command;
+import common.utils.CommandDTO;
+import org.lab6.commands.GenericCommand;
+import org.lab6.network.TCPClient;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +37,23 @@ public class CommandManager {
     public Map<String, Command> getCommands() {
         return commands;
     }
+
+    public boolean updateCommands(TCPClient client) throws IOException, ClassNotFoundException {
+        Response response = client.sendAndReceiveCommand(new Request(new CommandDTO("update_commands", null, null), null));
+
+        ArrayList<Command> serverCommands = response.getCommands();
+        if (serverCommands == null) {
+            return false;
+        }
+        //commands.clear();
+//        for (Map.Entry<String, Command> entry : clientCommands.entrySet()) {
+//            commands.put(entry.getKey(), entry.getValue().getArgumentType());
+//        }
+//        commands.putAll(serverCommands);
+        serverCommands.forEach((n) -> commands.put(n.getName(), new GenericCommand(n.getName(), n.getDescription(), n.getArgumentType())));
+        return true;
+    }
+
 
     /**
      * @return История команд.

@@ -1,7 +1,14 @@
 package org.lab6.commands;
 
+import common.network.Request;
+import common.network.Response;
+import common.utils.ArgumentType;
+import common.utils.Command;
 import org.lab6.utils.ExecutionResponse;
 import org.lab6.utils.console.Console;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Команда 'exit'. Завершает программу без сохранения в файл.
@@ -22,14 +29,12 @@ public class Exit extends Command {
      * @return Успешность выполнения команды.
      */
     @Override
-    public ExecutionResponse apply(String[] arguments) {
-        if (!arguments[1].isEmpty()) {
-            console.printError("Неправильное количество аргументов!");
-            console.printError("Использование: '" + getName() + "'");
-            return new ExecutionResponse(false, "Неправильное количество аргументов!");
-        }
-
+    public Response apply(Map<ArgumentType, Object> args) {
         console.println("Завершение выполнения...");
-        return new ExecutionResponse(true, "Завершение выполнения...");
+        return new Response(true, "Завершение выполнения...");
     }
+    public ArrayList<ArgumentType> getArgumentType(){
+        return new ArrayList<>();
+    };
+
 }

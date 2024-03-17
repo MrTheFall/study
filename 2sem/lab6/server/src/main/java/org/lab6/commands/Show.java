@@ -1,9 +1,15 @@
 package org.lab6.commands;
 
-import common.network.Request;
+import common.models.Dragon;
 import common.network.Response;
+import common.utils.ArgumentType;
+import common.utils.Command;
 import org.lab6.managers.CollectionManager;
 import org.lab6.utils.console.Console;
+
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Vector;
 
 /**
  * Команда 'show'. Выводит все элементы коллекции.
@@ -23,11 +29,14 @@ public class Show extends Command {
      * @return Успешность выполнения команды.
      */
     @Override
-    public Response apply(Request request) {
+    public Response apply(Map<ArgumentType, Object> args) {
         try {
             return new Response(true, null, collectionManager.getCollection());
         } catch (Exception e) {
-            return new Response(false, e.toString(), null);
+            throw new RuntimeException(e);
         }
+    }
+    public ArrayList<ArgumentType> getArgumentType() {
+        return new ArrayList<>();
     }
 }

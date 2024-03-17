@@ -1,4 +1,4 @@
-package org.lab6.commands;
+package common.utils;
 
 /**
  * Интерфейс объектов, имеющих описание.

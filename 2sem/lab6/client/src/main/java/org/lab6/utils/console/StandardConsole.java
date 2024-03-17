@@ -29,9 +29,9 @@ public class StandardConsole implements Console {
      * @param obj объект для вывода.
      */
     @Override
-    public void println(Object obj) {
-        System.out.println(obj);
-    }
+        public void println(Object obj) {
+            System.out.println(obj);
+        }
 
     /**
      * Выводит сообщение об ошибке на консоль.

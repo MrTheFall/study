@@ -13,6 +13,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Vector;
 
 /**
  * TCP обработчик запросов
@@ -34,23 +35,26 @@ public class TCPServer {
         logger.info("TCP Server started on port " + serverSocket.getLocalPort());
 
         while (running) {
-            try (Socket clientSocket = serverSocket.accept();
-                 ObjectOutputStream output = new ObjectOutputStream(clientSocket.getOutputStream());
-                 ObjectInputStream input = new ObjectInputStream(clientSocket.getInputStream())) {
-
+            Socket clientSocket = null;
+            try {
+                clientSocket = serverSocket.accept();
                 logger.info("Client connected from " + clientSocket.getRemoteSocketAddress());
+
+                ObjectOutputStream output = new ObjectOutputStream(clientSocket.getOutputStream());
+                ObjectInputStream input = new ObjectInputStream(clientSocket.getInputStream());
 
                 while (running && !clientSocket.isClosed()) {
                     Request request = null;
                     Response response = null;
-
                     try {
                         request = (Request) input.readObject();
                         logger.info("Processing request: " + request);
 
-                        response = commandHandler.handle(request);
-                        if (request.getCommand().equals("show")) {
-                            logger.error(response.getDragons());
+                        // Handle update_commands and show separately as per your original code
+                        if (request.getCommand().getName().equals("update_commands")) {
+                            response = new Response(true, null, commandHandler.manager.getCommandsWithArguments());
+                        } else if (request.getCommand().getName().equals("show")) {
+                            response = commandHandler.handle(request);
                             Collections.sort(response.getDragons(), new Comparator<Dragon>() {
                                 @Override
                                 public int compare(Dragon d1, Dragon d2) {
@@ -59,29 +63,44 @@ public class TCPServer {
                                     return Integer.compare(size1, size2);
                                 }
                             });
+                            logger.error(response.getDragons()); // Logging the sorted list
+                        } else {
+                            response = commandHandler.handle(request);
                         }
-                    } catch (ClassNotFoundException | IOException e) {
+                    } catch (IOException e) {
+                        logger.error("Error receiving request: " + e.getMessage());
+                        break;
+                    } catch (ClassNotFoundException e) {
                         logger.error("Error while receiving the request: " + e.getMessage(), e);
-                        response = new Response(false, "Failed to process request: " + (request != null ? request.getCommand() : "unknown"), null);
+                        response = new Response(false, "Failed to process request: " + (request != null ? request.getCommand() : "unknown"), (Vector<Dragon>) null);
                     } finally {
                         if (afterHook != null) afterHook.run();
                     }
 
+                    // Send responses back to client
                     try {
                         output.writeObject(response);
                         output.flush();
                         logger.info("Response sent to client");
                     } catch (IOException e) {
-                        logger.error("Error sending response to client: " + e.getMessage(), e);
+                        logger.error("Error sending response to client: ", e);
+                        // No break, to keep the server running and possibly accept further requests
                     }
                 }
             } catch (IOException e) {
-                if (running) {
-                    logger.error("Error handling client connection: " + e.getMessage(), e);
+                logger.error("Error handling client connection: " + e.getMessage(), e);
+            } finally {
+                if (clientSocket != null && !clientSocket.isClosed()) {
+                    try {
+                        clientSocket.close();
+                    } catch (IOException e) {
+                        logger.error("Failed to close client socket: " + e.getMessage(), e);
+                    }
                 }
             }
         }
 
+        // Close server socket
         try {
             serverSocket.close();
         } catch (IOException e) {

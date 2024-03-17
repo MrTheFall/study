@@ -3,20 +3,26 @@ package org.lab6.commands;
 import common.exceptions.APIException;
 import common.network.Request;
 import common.network.Response;
+import common.utils.ArgumentType;
+import common.utils.Command;
 import org.lab6.network.TCPClient;
-import org.lab6.utils.ExecutionResponse;
 import org.lab6.utils.console.Console;
 
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Команда 'show'. Выводит все элементы коллекции.
  */
-public class Show extends Command {
-    private final Console console;
-    private final TCPClient client;
+public class Show_REMOVE_LATER extends Command implements Serializable {
 
-    public Show(Console console, TCPClient client) {
+    private transient final Console console;
+
+    private transient final TCPClient client;
+
+    public Show_REMOVE_LATER(Console console, TCPClient client) {
         super("show", "вывести все элементы коллекции");
         this.console = console;
         this.client = client;
@@ -27,19 +33,19 @@ public class Show extends Command {
      * @return Успешность выполнения команды.
      */
     @Override
-    public ExecutionResponse apply(String[] arguments) {
-        if (!arguments[1].isEmpty()) {
+    public Response apply(Map<ArgumentType, Object> args) {
+        /*if (!request.getArguments()[1].isEmpty()) {
             console.println("Использование: '" + getName() + "'");
-            return new ExecutionResponse(false, "Неверное использование команды show");
-        }
+            return new Response(false, "Неверное использование команды show");
+        }*/ // ВЫНЕСТИ ЭТО В ОТДЕЛЬНЫЙ ХЕНДЛЕР
         try {
-            var response = (Response) client.sendAndReceiveCommand(new Request(this.getName(), arguments, null));
+            var response = (Response) client.sendAndReceiveCommand(new Request(this, args));
             if (!response.isSuccess()) {
                 throw new APIException(response.getMessage());
             }
             if (response.getDragons().isEmpty()) {
                 console.println("Коллекция пуста!");
-                return new ExecutionResponse(true, "Коллекция пуста");
+                return new Response(true, "Коллекция пуста");
             }
             for (var dragon : response.getDragons()) {
                 console.println(dragon + "\n");
@@ -47,6 +53,10 @@ public class Show extends Command {
         } catch (APIException | IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        return new ExecutionResponse(true, "Коллекция была выведена в виде строки   ");
+        return new Response(true, "Коллекция была выведена в виде строки   ");
     }
+
+    public ArrayList<ArgumentType> getArgumentType(){
+        return new ArrayList<>();
+    };
 }

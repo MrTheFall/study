@@ -23,8 +23,10 @@ public class Main {
             new Runner(console, client).interactiveMode();
         }catch (ConnectException e){
             logger.error("Сервер недоступен");
-        } catch (IOException | RuntimeException e) {
+        } catch (IOException e) {
             logger.error(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 }

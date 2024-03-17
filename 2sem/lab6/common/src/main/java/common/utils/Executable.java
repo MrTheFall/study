@@ -1,7 +1,11 @@
-package org.lab6.commands;
+package common.utils;
 
+import common.models.Dragon;
 import common.network.Request;
 import common.network.Response;
+
+import java.util.Map;
+import java.util.Vector;
 
 
 /**
@@ -10,9 +14,8 @@ import common.network.Response;
 public interface Executable {
     /**
      * Выполняет что-либо.
-     * @param arguments Аргумент для выполнения
      * @return результат выполнения
      */
-    Response apply(Request arguments);
+    Response apply(Map<ArgumentType, Object> args);
 }
 

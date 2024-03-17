@@ -1,7 +1,9 @@
 package org.lab6.managers;
 
 
-import org.lab6.commands.Command;
+import common.utils.ArgumentType;
+import common.utils.Command;
+import common.utils.CommandDTO;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,6 +31,16 @@ public class CommandManager {
      */
     public Map<String, Command> getCommands() {
         return commands;
+    }
+
+    public ArrayList<Command> getCommandsWithArguments() {
+        Map<String, Command> commands = this.getCommands();
+        ArrayList<Command> commandsWithArguments = new ArrayList<>();
+
+        for (Map.Entry<String, Command> entry : commands.entrySet()) {
+            commandsWithArguments.add(new CommandDTO(entry.getKey(), entry.getValue().getDescription(), entry.getValue().getArgumentType()));
+        }
+        return commandsWithArguments;
     }
 
     /**

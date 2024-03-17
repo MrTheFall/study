@@ -1,32 +1,29 @@
 package common.network;
 
 import common.models.Dragon;
+import common.utils.ArgumentType;
+import common.utils.Command;
 
 import java.io.Serializable;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Vector;
 
 public class Request implements Serializable {
-    private String command;
-    private String[] arguments;
-    private Vector<Dragon> dragons;
+    private Command command;
+    private Map<ArgumentType, Object> args;
 
-    public Request(String command, String[] arguments, Vector<Dragon> dragons) {
+    public Request(Command command, Map<ArgumentType, Object> args) {
         this.command = command;
-        this.arguments = arguments;
-        this.dragons = dragons;
+        this.args = args;
     }
 
-    public String getCommand() {
+    public Command getCommand() {
         return command;
     }
 
-    public Vector<Dragon> getDragons() {
-        return dragons;
-    }
-
-    public String[] getArguments() {
-        return arguments;
+    public Map<ArgumentType, Object> getArguments() {
+        return args;
     }
 
     @Override

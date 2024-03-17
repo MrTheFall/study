@@ -1,9 +1,18 @@
-package org.lab6.commands;
+package common.utils;
+
+import common.models.Dragon;
+import common.network.Request;
+import common.network.Response;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Vector;
 
 /**
  * Абстрактная команда с именем и описанием
  */
-public abstract class Command implements Describable, Executable {
+public abstract class Command implements Describable, Executable, Serializable {
     private final String name;
     private final String description;
 
@@ -50,4 +59,8 @@ public abstract class Command implements Describable, Executable {
                 ", description='" + description + '\'' +
                 '}';
     }
+
+    public abstract ArrayList<ArgumentType> getArgumentType();
+
+    public abstract Response apply(Map<ArgumentType, Object> args);
 }

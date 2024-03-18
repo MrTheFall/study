@@ -85,15 +85,9 @@ public class Runner {
 
         } catch (NoSuchElementException exception) {
             console.printError("Пользовательский ввод не обнаружен!");
-        } catch (IllegalStateException exception) {
+        } catch (RuntimeException e) {
             console.printError("Непредвиденная ошибка!");
-        } catch (Ask.AskBreak e) {
-            throw new RuntimeException(e);
-        } catch (APIException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
+        } catch (Ask.AskBreak | ClassNotFoundException | IOException | APIException e) {
             throw new RuntimeException(e);
         }
     }
@@ -171,7 +165,7 @@ public class Runner {
                     try {
                         args.put(ArgumentType.ID, Integer.parseInt(userCommand[1]));
                     } catch (NumberFormatException e) {
-                        console.printError("ID не распознан");
+                        throw new IllegalArgumentException("ID не распознан");
                     }
                     break;
                 case DRAGON:
@@ -193,13 +187,11 @@ public class Runner {
     private ExitCode launchCommand(String[] userCommand) throws Ask.AskBreak, APIException, IOException, ClassNotFoundException {
         if (userCommand[0].isEmpty()) return ExitCode.OK;
         Command command = commandManager.getCommands().get(userCommand[0]);
-        CommandDTO commandDTO = new CommandDTO(command.getName(), command.getDescription(), command.getArgumentType());
-
-
         if (command == null) {
             console.printError("Команда '" + userCommand[0] + "' не найдена. Наберите 'help' для справки");
             return ExitCode.ERROR;
         }
+        CommandDTO commandDTO = new CommandDTO(command.getName(), command.getDescription(), command.getArgumentType());
 
         switch (userCommand[0]) {
             case "exit" -> {
@@ -211,7 +203,13 @@ public class Runner {
                 else return scriptMode(userCommand[1]);
             }
             default -> {
-                Map<ArgumentType, Object> args = handleArguments(command.getArgumentType(), userCommand);
+                Map<ArgumentType, Object> args;
+                try {
+                    args = handleArguments(command.getArgumentType(), userCommand);
+                } catch (IllegalArgumentException e) {
+                    console.printError(e.getMessage());
+                    return ExitCode.ERROR;
+                }
                 var response = (Response) client.sendAndReceiveCommand(new Request(commandDTO, args));
                 if (!response.isSuccess()) {
                     console.printError(response.getMessage());

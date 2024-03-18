@@ -35,12 +35,12 @@ public class Main {
         collectionManager.validateAll(console);
         Runtime.getRuntime().addShutdownHook(new Thread(collectionManager::saveCollection));
         var commandManager = new CommandManager() {{
-//            register("help", new Help(console, this));
-//            register("info", new Info(console, collectionManager));
-//            register("add", new Add(console, collectionManager));
-//            register("update", new Update(console, collectionManager));
+            register("help", new Help(console, this));
+            register("info", new Info(console, collectionManager));
+            register("add", new Add(console, collectionManager));
+            register("update", new Update(console, collectionManager));
 //            register("remove_by_id", new RemoveById(console, collectionManager));
-//            register("clear", new Clear(console, collectionManager));
+            register("clear", new Clear(console, collectionManager));
             register("show", new Show(console, collectionManager));
 //            register("add_if_max", new AddIfMax(console, collectionManager));
 //            register("insert", new Insert(console, collectionManager));

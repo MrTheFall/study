@@ -2,6 +2,7 @@ package org.lab6.managers;
 
 import common.models.Dragon;
 import common.network.Response;
+import common.utils.Command;
 import org.lab6.utils.console.Console;
 
 public class ResponseHandler {
@@ -10,14 +11,17 @@ public class ResponseHandler {
         if (response.isSuccess()) {
             if (response.getMessage() != null) console.println(response.getMessage());
 
-            // Check if dragons vector is not null and not empty, then print its content
             if (response.getDragons() != null && !response.getDragons().isEmpty()) {
                 for (Dragon dragon : response.getDragons()) {
-                    console.println(dragon);  // Assumes Dragon class has a sensible toString() implementation
+                    console.println(dragon);
+                }
+            }
+            if (response.getCommands() != null && !response.getCommands().isEmpty()) {
+                for (Command command : response.getCommands()) {
+                    console.printTable(command.getName(), command.getDescription());
                 }
             }
         } else {
-            // Since the response is unsuccessful, we print the error message
             console.printError(response.getMessage());
         }
     }

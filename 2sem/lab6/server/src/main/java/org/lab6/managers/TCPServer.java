@@ -7,6 +7,7 @@ import org.apache.commons.lang3.SerializationUtils;
 import org.apache.logging.log4j.Logger;
 import org.lab6.Main;
 import org.lab6.handlers.CommandHandler;
+import org.lab6.utils.console.Console;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -63,7 +64,7 @@ public class TCPServer {
                                     return Integer.compare(size1, size2);
                                 }
                             });
-                            logger.error(response.getDragons()); // Logging the sorted list
+                            //logger.printf(response.getDragons()); // Logging the sorted list
                         } else {
                             response = commandHandler.handle(request);
                         }
@@ -79,6 +80,7 @@ public class TCPServer {
 
                     // Send responses back to client
                     try {
+                        output.reset();
                         output.writeObject(response);
                         output.flush();
                         logger.info("Response sent to client");

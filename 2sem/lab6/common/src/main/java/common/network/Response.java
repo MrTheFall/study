@@ -4,6 +4,7 @@ import common.models.Dragon;
 import common.utils.ArgumentType;
 import common.utils.Command;
 
+import java.io.Console;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;
@@ -11,30 +12,38 @@ import java.util.Objects;
 import java.util.Vector;
 
 public class Response implements Serializable {
-    private boolean success;
-    private String message;
-    private Vector<Dragon> dragons;
-    private ArrayList<Command> commands;
+    private final boolean success;
+    private final String message;
+    private final Vector<Dragon> dragons;
+    private final ArrayList<Command> commands;
 
+    public Response(boolean success, String message, Vector<Dragon> dragons, ArrayList<Command> commands) {
+        this.success = success;
+        this.message = message;
+        this.dragons = dragons;
+        this.commands = commands;
+    }
     public Response(boolean success, String message, Vector<Dragon> dragons) {
         this.success = success;
         this.message = message;
         this.dragons = dragons;
+        this.commands = null;
+    }
+    public Response(boolean success, String message, ArrayList<Command> commands) {
+        this.success = success;
+        this.message = message;
+        this.dragons = null;
+        this.commands = commands;
     }
     public Response(boolean success, String message) {
         this.success = success;
         this.message = message;
         this.dragons = null;
-    }
-
-    public Response(boolean success, String message, ArrayList<Command> commands) {
-        this.success = success;
-        this.message = message;
-        this.commands = commands;
+        this.commands = null;
     }
 
     public Vector<Dragon> getDragons() {
-        return dragons;
+        return this.dragons;
     }
 
     public String getMessage() {

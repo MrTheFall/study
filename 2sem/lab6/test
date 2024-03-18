@@ -1,68 +1,16 @@
 [
   {
-    "id": 3,
-    "name": "1",
-    "coordinates": {
-      "x": 1.0,
-      "y": 1
-    },
-    "creationDate": "2024-02-08T23:33:24.3140481",
-    "age": 1,
-    "speaking": true,
-    "color": "RED",
-    "character": null,
-    "killer": null
-  },
-  {
-    "id": 4,
-    "name": "1",
-    "coordinates": {
-      "x": 1.0,
-      "y": 1
-    },
-    "creationDate": "2024-02-08T23:33:52.1893454",
-    "age": 1,
-    "speaking": true,
-    "color": "RED",
-    "character": null,
-    "killer": null
-  },
-  {
-    "id": 2,
-    "name": "1",
-    "coordinates": {
-      "x": 1.0,
-      "y": 1
-    },
-    "creationDate": "2024-02-08T23:27:23.2915336",
-    "age": 1,
-    "speaking": true,
-    "color": "YELLOW",
-    "character": null,
-    "killer": null
-  },
-  {
     "id": 1,
-    "name": "testdra",
+    "name": "2",
     "coordinates": {
-      "x": 1.0,
+      "x": 2.0,
       "y": 2
     },
-    "creationDate": "2024-02-07T23:35:09.5392269",
-    "age": 3,
-    "speaking": true,
-    "color": "RED",
-    "character": "CUNNING",
-    "killer": {
-      "name": "noone",
-      "birthday": "2024-02-07T13:15:24-03:00",
-      "height": 1.0,
-      "weight": 33,
-      "location": {
-        "x": 1.0,
-        "y": 2.0,
-        "z": 4
-      }
-    }
+    "creationDate": "2024-03-18T04:16:23.8406949",
+    "age": 2,
+    "speaking": false,
+    "color": "YELLOW",
+    "character": "WISE",
+    "killer": null
   }
 ]

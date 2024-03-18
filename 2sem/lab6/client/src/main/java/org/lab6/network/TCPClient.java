@@ -23,14 +23,13 @@ public class TCPClient {
     private ObjectOutputStream outputStream;
     private ObjectInputStream inputStream;
 
-    private final Logger logger = getLogger(Main.class); // This is an example of how you would typically get the logger via LogManager
+    private final Logger logger = getLogger(Main.class);
 
     public TCPClient(InetAddress hostname, int port) throws IOException {
         this.serverAddress = new InetSocketAddress(hostname, port);
         this.client = SocketChannel.open();
         this.client.connect(serverAddress);
 
-        // Prepare the streams
         outputStream = new ObjectOutputStream(Channels.newOutputStream(client));
         inputStream = new ObjectInputStream(Channels.newInputStream(client));
 
@@ -40,9 +39,7 @@ public class TCPClient {
     public Response sendAndReceiveCommand(Request request) throws IOException, ClassNotFoundException {
         outputStream.writeObject(request);
         outputStream.flush();
-
-        Response response = (Response)inputStream.readObject();
-
+        Response response = (Response) inputStream.readObject();
         logger.info("Received response from server: " + response);
         return response;
     }

@@ -193,8 +193,8 @@ public class CollectionManager {
      */
     public void clear() {
         collection.clear();
+        currentId = 1;
     }
-
 
     /**
      * Проверяет валидность всех элементов коллекции. В случае обнаружения невалидного элемента выводит ошибку.

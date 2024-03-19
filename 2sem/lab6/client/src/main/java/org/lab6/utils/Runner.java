@@ -45,25 +45,12 @@ public class Runner {
         this.client = client;
         this.console = console;
         this.commandManager = new CommandManager() {{
-//            register("help", new Help(console, client));
-//            register("info", new Info(console, client));
-//            register("add", new Add(console, client));
-//            register("update", new Update(console, client));
-//            register("remove_by_id", new RemoveById(console, client));
-//            register("clear", new Clear(console, client));
-//            register("show", new Show(console, client));
-            register("execute_script", new ExecuteScript(console));
+            register("execute_script", new ExecuteScript(console)); // Это клиентские команды для клиентского приложения
             register("exit", new Exit(console));
-//            register("add_if_max", new AddIfMax(console, client));
-//            register("insert", new Insert(console, client));
-//            register("sort", new Sort(console, client));
-//            register("average_of_age", new AverageOfAge(console, client));
-//            register("group_counting_by_creation_date", new GroupCountingByCreationDate(console, client));
-//            register("print_unique_color", new PrintUniqueColor(console, client));
         }};
         this.commandManager.updateCommands(client);
         this.responseHandler = new ResponseHandler();
-        console.println(this.commandManager.getCommands());
+        //console.println(this.commandManager.getCommands());
     }
 
     /**
@@ -142,13 +129,7 @@ public class Runner {
         } catch (IllegalStateException exception) {
             console.printError("Непредвиденная ошибка!");
             System.exit(0);
-        } catch (Ask.AskBreak e) {
-            throw new RuntimeException(e);
-        } catch (APIException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
+        } catch (Ask.AskBreak | APIException | IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         } finally {
             scriptStack.remove(scriptStack.size() - 1);
@@ -168,8 +149,18 @@ public class Runner {
                         throw new IllegalArgumentException("ID не распознан");
                     }
                     break;
+                case INDEX:
+                    try {
+                        args.put(ArgumentType.INDEX, Integer.parseInt(userCommand[1]));
+                    } catch (NumberFormatException e) {
+                        throw new IllegalArgumentException("INDEX не распознан");
+                    }
+                    break;
                 case DRAGON:
                     args.put(ArgumentType.DRAGON, Ask.askDragon(console));
+                    break;
+                case SCRIPT_NAME:
+                    args.put(ArgumentType.DRAGON, userCommand[1]);
                     break;
                 default:
                     throw new IllegalArgumentException("Unsupported ArgumentType: " + argumentType);

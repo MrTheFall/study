@@ -39,15 +39,15 @@ public class Main {
             register("info", new Info(console, collectionManager));
             register("add", new Add(console, collectionManager));
             register("update", new Update(console, collectionManager));
-//            register("remove_by_id", new RemoveById(console, collectionManager));
+            register("remove_by_id", new RemoveById(console, collectionManager));
             register("clear", new Clear(console, collectionManager));
             register("show", new Show(console, collectionManager));
-//            register("add_if_max", new AddIfMax(console, collectionManager));
-//            register("insert", new Insert(console, collectionManager));
-//            register("sort", new Sort(console, collectionManager));
-//            register("average_of_age", new AverageOfAge(console, collectionManager));
-//            register("group_counting_by_creation_date", new GroupCountingByCreationDate(console, collectionManager));
-//            register("print_unique_color", new PrintUniqueColor(console, collectionManager));
+            register("add_if_max", new AddIfMax(console, collectionManager));
+            register("insert", new Insert(console, collectionManager));
+            register("sort", new Sort(console, collectionManager));
+            register("average_of_age", new AverageOfAge(console, collectionManager));
+            register("group_counting_by_creation_date", new GroupCountingByCreationDate(console, collectionManager));
+            register("print_unique_color", new PrintUniqueColor(console, collectionManager));
         }};
 
         try {

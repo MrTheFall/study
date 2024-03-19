@@ -21,6 +21,14 @@ public class ResponseHandler {
                     console.printTable(command.getName(), command.getDescription());
                 }
             }
+            if (response.getUniqueColors() != null && !response.getUniqueColors().isEmpty()) {
+                response.getUniqueColors().forEach(console::println);
+            }
+            if (response.getDragonGroups() != null && !response.getDragonGroups().isEmpty()) {
+                response.getDragonGroups().forEach((date, dragons) -> {
+                    console.println("Дата создания: " + date + " | Количество драконов: " + dragons.size());
+                });
+            }
         } else {
             console.printError(response.getMessage());
         }

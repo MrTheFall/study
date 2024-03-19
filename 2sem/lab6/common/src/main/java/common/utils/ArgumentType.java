@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public enum ArgumentType implements Serializable {
     ID,
-    SCRIPT_NAME,
-    DRAGON
+    INDEX,
+    DRAGON,
+    SCRIPT_NAME
 }

@@ -1,16 +1,26 @@
 [
   {
     "id": 1,
-    "name": "2",
+    "name": "testname",
     "coordinates": {
-      "x": 2.0,
+      "x": 1.0,
       "y": 2
     },
-    "creationDate": "2024-03-18T04:16:23.8406949",
-    "age": 2,
-    "speaking": false,
-    "color": "YELLOW",
-    "character": "WISE",
-    "killer": null
+    "creationDate": "2024-03-19T03:19:17.8882871",
+    "age": 12,
+    "speaking": true,
+    "color": "RED",
+    "character": "CUNNING",
+    "killer": {
+      "name": "killer",
+      "birthday": "2024-02-07T13:15:24-03:00",
+      "height": 228.0,
+      "weight": 1337,
+      "location": {
+        "x": 1.0,
+        "y": 2.0,
+        "z": 3
+      }
+    }
   }
 ]

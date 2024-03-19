@@ -39,8 +39,8 @@ public class Update extends Command {
             int id = (int) args.get(ArgumentType.ID);
             var old = collectionManager.getById(id);
             if (old == null || !collectionManager.getCollection().contains(old)) {
-                console.println("не существующий ID");
-                return new Response(false, "не существующий ID!");
+                console.println("Передан несуществующий ID");
+                return new Response(false, "Передан несуществующий ID!");
             }
             Dragon d = (Dragon) args.get(ArgumentType.DRAGON);
             d.setId(id);

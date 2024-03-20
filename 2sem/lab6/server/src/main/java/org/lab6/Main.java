@@ -8,7 +8,6 @@ import org.lab6.managers.CollectionManager;
 import org.lab6.managers.CommandManager;
 import org.lab6.managers.DumpManager;
 import org.lab6.managers.TCPServer;
-import org.lab6.utils.Runner;
 import org.lab6.utils.console.StandardConsole;
 
 import java.io.IOException;
@@ -49,40 +48,21 @@ public class Main {
             register("average_of_age", new AverageOfAge(console, collectionManager));
             register("group_counting_by_creation_date", new GroupCountingByCreationDate(console, collectionManager));
             register("print_unique_color", new PrintUniqueColor(console, collectionManager));
+
+            register("exit", new Exit(console));                        // Server-only command
+            register("save", new Save(console, collectionManager));     // Server-only command
         }};
 
-        Thread interactiveModeThread = new Thread(() -> {
-            try {
-                new Runner(console, collectionManager).interactiveMode();
-            } catch (Exception e) {
-                logger.error("Ошибка при создании интерактивного режима Runner", e);
-            }
-        });
-
-        interactiveModeThread.start();
-
-        Thread serverThread = new Thread(() -> {
-            try {
-                var server = new TCPServer(PORT, new CommandHandler(commandManager));
-                //server.setAfterHook(collectionManager::saveCollection); // Уберем если не хотим сохранять коллекцию после каждой команды
-                server.run();
-            } catch (SocketException e) {
-                logger.fatal("Случилась ошибка сокета", e);
-            } catch (UnknownHostException e) {
-                logger.fatal("Неизвестный хост", e);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-
-        serverThread.start();
-
         try {
-            interactiveModeThread.join();
-            serverThread.join();
-        } catch (InterruptedException e) {
-            logger.error("Main thread was interrupted", e);
+            var server = new TCPServer(PORT, new CommandHandler(commandManager));
+            //server.setAfterHook(collectionManager::saveCollection);
+            server.run();
+        } catch (SocketException e) {
+            logger.fatal("Случилась ошибка сокета", e);
+        } catch (UnknownHostException e) {
+            logger.fatal("Неизвестный хост", e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-
     }
 }

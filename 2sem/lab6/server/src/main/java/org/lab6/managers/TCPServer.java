@@ -51,7 +51,6 @@ public class TCPServer {
                         request = (Request) input.readObject();
                         logger.info("Processing request: " + request);
 
-                        // Handle update_commands and show separately as per your original code
                         if (request.getCommand().getName().equals("update_commands")) {
                             response = new Response(true, null, commandHandler.manager.getCommandsWithArguments());
                         } else if (request.getCommand().getName().equals("show")) {
@@ -78,7 +77,6 @@ public class TCPServer {
                         if (afterHook != null) afterHook.run();
                     }
 
-                    // Send responses back to client
                     try {
                         output.reset();
                         output.writeObject(response);
@@ -86,7 +84,6 @@ public class TCPServer {
                         logger.info("Response sent to client");
                     } catch (IOException e) {
                         logger.error("Error sending response to client: ", e);
-                        // No break, to keep the server running and possibly accept further requests
                     }
                 }
             } catch (IOException e) {

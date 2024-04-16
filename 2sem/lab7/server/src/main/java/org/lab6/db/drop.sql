@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS dragon;
+DROP TABLE IF EXISTS person;
+DROP TABLE IF EXISTS location;
+DROP TABLE IF EXISTS coordinates;
+
+DROP TYPE IF EXISTS dragon_character;
+DROP TYPE IF EXISTS color;

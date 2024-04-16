@@ -64,8 +64,7 @@ public class TCPServer {
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
                     String[] line= (bufferedReader.readLine().trim() + " ").split(" ", 2);
                     Request request = new Request(new CommandDTO(line[0], "", new ArrayList<ArgumentType>()), new HashMap<>());
-                    var a = commandHandler.handle(request);
-                    System.out.println(a);
+                    commandHandler.handle(request);
                 }
             }
         }

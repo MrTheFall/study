@@ -1,0 +1,32 @@
+[
+  {
+    "id": 3,
+    "name": "qew",
+    "coordinates": {
+      "id": 9,
+      "x": 1.0,
+      "y": 2
+    },
+    "creationDate": "2024-04-17T01:56:42.8161592",
+    "age": 312,
+    "speaking": false,
+    "color": "RED",
+    "character": null,
+    "killer": null
+  },
+  {
+    "id": 4,
+    "name": "12",
+    "coordinates": {
+      "id": 10,
+      "x": 2.0,
+      "y": 3
+    },
+    "creationDate": "2024-04-17T01:56:42.8161592",
+    "age": 4,
+    "speaking": false,
+    "color": "YELLOW",
+    "character": "WISE",
+    "killer": null
+  }
+]

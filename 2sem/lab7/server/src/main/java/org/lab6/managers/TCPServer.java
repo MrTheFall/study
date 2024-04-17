@@ -62,7 +62,7 @@ public class TCPServer {
 
                 if (key.isValid() && key.isReadable()) {
                     new Thread(() -> {
-                        answerWithEcho(selector, key);
+                        answer(selector, key);
                     }).start();
                 }
 
@@ -144,7 +144,7 @@ public class TCPServer {
         return response;
     }
 
-    private void answerWithEcho(Selector selector, SelectionKey key) {
+    private void answer(Selector selector, SelectionKey key) {
         SocketChannel client = (SocketChannel) key.channel();
 
         if (!client.isOpen()) {

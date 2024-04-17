@@ -2,13 +2,10 @@ package org.lab6.managers;
 
 import common.models.*;
 
-import javax.swing.*;
-import java.lang.reflect.Type;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.Base64;
@@ -72,6 +69,7 @@ public class DatabaseManager {
             }
         } catch (SQLException e) {
             System.err.println("Failed to load collection from database: " + e.getMessage());
+            System.exit(0);
         }
         return dragons;
     }

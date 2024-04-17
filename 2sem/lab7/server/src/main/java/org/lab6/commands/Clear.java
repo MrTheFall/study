@@ -37,7 +37,8 @@ public class Clear extends Command {
     @Override
     public Response apply(Map<ArgumentType, Object> args) {
         try {
-
+//            System.out.println("Sleeping in clear");
+//            Thread.sleep(10000);
             boolean result = databaseManager.clearDb();
             collectionManager.clear();
             if (!result) return new Response(false, "Не удалось очистить базу!");

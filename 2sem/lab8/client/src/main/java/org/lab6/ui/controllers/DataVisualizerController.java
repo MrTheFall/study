@@ -22,5 +22,5 @@ public abstract class DataVisualizerController {
 
     public abstract Dragon getChosenDragon();
 
-    public abstract void setChosenDragon(Dragon human);
+    public abstract void setChosenDragon(Dragon dragon);
 }

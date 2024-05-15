@@ -120,6 +120,7 @@ public class MenuFormController extends AbstractController {
                 ChildWindowController controller = loader.getController();
                 controller.setMenuModel(model);
                 targetPane.getChildren().add(parent);
+                getStage().setResizable(false);
             }
         } catch (IOException e) {
             e.printStackTrace();

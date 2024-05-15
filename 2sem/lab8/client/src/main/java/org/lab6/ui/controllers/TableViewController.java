@@ -404,7 +404,7 @@ public class TableViewController extends DataVisualizerController{
         fullCollection.removeAll(elementsToRemove);
         fullCollection.addAll(elementsToAdd);
         List<Integer> updatedIds = elementsToUpdate.stream().map(Dragon::getId).toList();
-        fullCollection.removeIf(human -> updatedIds.contains(human.getId()));
+        fullCollection.removeIf(dragon -> updatedIds.contains(dragon.getId()));
         fullCollection.addAll(elementsToUpdate);
         fullCollection.sort(Comparator.comparing(Dragon::getId));
         collectionToShow.clear();

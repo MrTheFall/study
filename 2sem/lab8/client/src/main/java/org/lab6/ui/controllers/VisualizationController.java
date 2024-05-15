@@ -20,7 +20,7 @@ public class VisualizationController extends DataVisualizerController {
 
     @FXML
     private AnchorPane visualizationPane;
-    private Dragon chosenHuman;
+    private Dragon chosenDragon;
     private final Map<Dragon, Canvas> dragons = new HashMap<>();
     private static final Map<String, Color> colors = new HashMap<>();
 
@@ -37,7 +37,7 @@ public class VisualizationController extends DataVisualizerController {
         });
         dragonCanvas.setOnMousePressed(mouseEvent -> {
             if (mouseEvent.isPrimaryButtonDown() && mouseEvent.getClickCount() == 2) {
-                chosenHuman = dragon;
+                chosenDragon = dragon;
                 getParentController().loadUI(GUIConfig.PROFILE_WINDOW_PATH, null, ChildUIType.DRAGON_PROFILE_CHILD_WINDOW);
             }
         });
@@ -187,11 +187,11 @@ public class VisualizationController extends DataVisualizerController {
 
     @Override
     public Dragon getChosenDragon() {
-        return chosenHuman;
+        return chosenDragon;
     }
 
     @Override
     public void setChosenDragon(Dragon dragon) {
-        this.chosenHuman = dragon;
+        this.chosenDragon = dragon;
     }
 }

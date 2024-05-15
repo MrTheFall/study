@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 
 
 public class Localization {
-    private final Locale currentLocale = Locale.getDefault();
     private final Locale ruRuLocale = new Locale("ru", "RU");
     private final Locale nlNlLocale = new Locale("nl", "NL");
     private final Locale frFrLocale = new Locale("fr", "FR");

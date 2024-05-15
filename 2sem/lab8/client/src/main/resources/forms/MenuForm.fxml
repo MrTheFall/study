@@ -1,60 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="749.0" prefWidth="1301.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.lab6.ui.controllers.MenuFormController">
    <children>
-      <Button fx:id="buttonAdd" layoutX="7.0" layoutY="241.0" mnemonicParsing="false" onAction="#addButtonClicked" prefHeight="46.0" prefWidth="170.0" text="%button.add">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Button>
-      <Button fx:id="buttonClear" layoutX="7.0" layoutY="299.0" mnemonicParsing="false" onAction="#clearButtonClicked" prefHeight="46.0" prefWidth="170.0" text="%button.clear">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Button>
       <Label fx:id="menuUsernameLabel" alignment="TOP_RIGHT" layoutX="1117.0" layoutY="16.0" prefHeight="59.0" prefWidth="170.0" text="%menu.username" textAlignment="RIGHT" textOverrun="CENTER_ELLIPSIS" wrapText="true">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </Label>
-      <Button fx:id="buttonTableView" layoutX="188.0" layoutY="181.0" mnemonicParsing="false" onAction="#tableButtonClicked" prefHeight="46.0" prefWidth="273.0" text="%button.tableview">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Button>
-      <Button fx:id="buttonGraphicsView" layoutX="478.0" layoutY="181.0" mnemonicParsing="false" onAction="#visualizeButtonClicked" prefHeight="46.0" prefWidth="273.0" text="%button.graphicsview">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Button>
       <TextArea fx:id="terminal" layoutX="188.0" layoutY="16.0" prefHeight="156.0" prefWidth="912.0" />
       <Pane fx:id="visualPane" layoutX="188.0" layoutY="235.0" prefHeight="504.0" prefWidth="1100.0" />
-      <Button fx:id="buttonAverageOfAge" layoutX="7.0" layoutY="358.0" mnemonicParsing="false" onAction="#averageOfAgeButtonClicked" prefHeight="46.0" prefWidth="170.0" text="%button.averageOfAge">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Button>
-      <Button fx:id="buttonGroupCountingByCreationDate" layoutX="7.0" layoutY="415.0" mnemonicParsing="false" onAction="#groupCountingByCreationDateButtonClicked" prefHeight="46.0" prefWidth="170.0" text="%button.groupCountingByCreationDate">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Button>
-      <Button fx:id="buttonInfo" layoutX="7.0" layoutY="476.0" mnemonicParsing="false" onAction="#infoButtonClicked" prefHeight="46.0" prefWidth="170.0" text="%button.info">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Button>
-      <Button fx:id="buttonUniqueColors" layoutX="7.0" layoutY="533.0" mnemonicParsing="false" onAction="#uniqueColorsButtonClicked" prefHeight="46.0" prefWidth="170.0" text="%button.uniqueColors">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Button>
+      <VBox layoutX="11.0" layoutY="235.0" prefHeight="504.0" prefWidth="177.0" spacing="15.0">
+         <children>
+            <Button fx:id="buttonAdd" mnemonicParsing="false" onAction="#addButtonClicked" prefHeight="46.0" prefWidth="170.0" text="%button.add">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttonClear" mnemonicParsing="false" onAction="#clearButtonClicked" prefHeight="46.0" prefWidth="170.0" text="%button.clear">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttonAverageOfAge" mnemonicParsing="false" onAction="#averageOfAgeButtonClicked" prefHeight="46.0" prefWidth="170.0" text="%button.averageOfAge">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttonGroupCountingByCreationDate" mnemonicParsing="false" onAction="#groupCountingByCreationDateButtonClicked" prefHeight="46.0" prefWidth="170.0" text="%button.groupCountingByCreationDate">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttonInfo" mnemonicParsing="false" onAction="#infoButtonClicked" prefHeight="46.0" prefWidth="170.0" text="%button.info">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttonUniqueColors" mnemonicParsing="false" onAction="#uniqueColorsButtonClicked" prefHeight="46.0" prefWidth="170.0" text="%button.uniqueColors">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Button>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+      <HBox layoutX="188.0" layoutY="178.0" prefHeight="46.0" prefWidth="1094.0" spacing="20.0">
+         <children>
+            <Button fx:id="buttonTableView" mnemonicParsing="false" onAction="#tableButtonClicked" prefHeight="46.0" prefWidth="273.0" text="%button.tableview">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttonGraphicsView" mnemonicParsing="false" onAction="#visualizeButtonClicked" prefHeight="46.0" prefWidth="273.0" text="%button.graphicsview">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

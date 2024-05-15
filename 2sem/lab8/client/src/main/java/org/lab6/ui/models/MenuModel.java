@@ -155,8 +155,8 @@ public class MenuModel {
     private List<Dragon> getElementsToUpdate(List<Dragon> recievedPeople) {
         List<Dragon> elementsToUpdate = new ArrayList<>();
         for (Dragon recievedDragon : recievedPeople) {
-            for (Dragon human : collection) {
-                if (human.getId() == recievedDragon.getId() && human.hashCode() != recievedDragon.hashCode()) {
+            for (Dragon dragon : collection) {
+                if (dragon.getId() == recievedDragon.getId() && dragon.hashCode() != recievedDragon.hashCode()) {
                     elementsToUpdate.add(recievedDragon);
                 }
             }

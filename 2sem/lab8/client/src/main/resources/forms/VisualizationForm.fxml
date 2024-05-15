@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane fx:id="visualizationPane" prefHeight="400.0" prefWidth="600.0" styleClass="vis_pane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.lab6.ui.controllers.VisualizationController">
+   <children>
+      <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="504.0" prefWidth="1030.0" styleClass="vis_pane">
+         <children>
+            <Canvas fx:id="canvas" height="504.0" layoutY="-2.0" width="1030.0" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

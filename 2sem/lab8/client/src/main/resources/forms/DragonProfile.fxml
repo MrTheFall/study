@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="560.0" prefWidth="596.0" styleClass="openable_profile_pane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.lab6.ui.controllers.DragonProfileController">
+   <children>
+      <Pane fx:id="topPane" prefHeight="77.0" prefWidth="602.0" style="-fx-background-color: #4BBB56;">
+         <children>
+            <Text layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%DRAGON_PROFILE" textAlignment="CENTER" wrappingWidth="602.0">
+               <font>
+                  <Font name="Exo 2 Regular" size="32.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <VBox fx:id="buttonsVBox" alignment="TOP_CENTER" layoutX="14.0" layoutY="285.0" prefHeight="200.0" prefWidth="200.0" spacing="25.0">
+         <children>
+            <Button fx:id="updateButton" alignment="TOP_CENTER" disable="true" maxHeight="40.0" maxWidth="202.0" mnemonicParsing="false" onAction="#update" prefHeight="40.0" prefWidth="202.0" styleClass="light_green_button" text="%UPDATE" textAlignment="CENTER">
+               <font>
+                  <Font name="Exo 2 Regular" size="19.0" />
+               </font>
+            </Button>
+            <Button fx:id="removeButton" disable="true" maxHeight="40.0" maxWidth="200.0" mnemonicParsing="false" onAction="#remove" prefHeight="40.0" prefWidth="200.0" styleClass="light_green_button" text="%REMOVE">
+               <font>
+                  <Font name="Exo 2 Regular" size="19.0" />
+               </font>
+            </Button>
+            <Button fx:id="closeButton" maxHeight="40.0" maxWidth="200.0" mnemonicParsing="false" onAction="#close" prefHeight="40.0" prefWidth="200.0" styleClass="light_green_button" text="%CLOSE">
+               <font>
+                  <Font name="Exo 2 Regular" size="19.0" />
+               </font>
+            </Button>
+         </children>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+      </VBox>
+      <VBox fx:id="fieldsVBox" alignment="TOP_RIGHT" layoutX="221.0" layoutY="77.0" maxWidth="146.0" prefHeight="475.0" prefWidth="146.0" spacing="7.0">
+         <children>
+            <Label alignment="CENTER_RIGHT" prefHeight="1.0" prefWidth="162.0" text="%NAME" textAlignment="RIGHT">
+               <font>
+                  <Font name="Exo 2 Regular" size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER_RIGHT" prefHeight="10.0" prefWidth="162.0" text="X" textAlignment="RIGHT">
+               <font>
+                  <Font name="Exo 2 Regular" size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="162.0" text="Y" textAlignment="RIGHT">
+               <font>
+                  <Font name="Exo 2 Regular" size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER_RIGHT" prefHeight="14.0" prefWidth="162.0" text="%AGE" textAlignment="RIGHT">
+               <font>
+                  <Font name="Exo 2 Regular" size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="162.0" text="%SPEAKING" textAlignment="RIGHT">
+               <font>
+                  <Font name="Exo 2 Regular" size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER_RIGHT" prefHeight="9.0" prefWidth="162.0" text="%COLOR" textAlignment="RIGHT">
+               <font>
+                  <Font name="Exo 2 Regular" size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="162.0" text="%CHARACTER" textAlignment="RIGHT">
+               <font>
+                  <Font name="Exo 2 Regular" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="killerText" alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="162.0" text="%KILLER" textAlignment="RIGHT">
+               <font>
+                  <Font name="Exo 2 Regular" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="killerNameText" alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="162.0" text="%KILLER_NAME" textAlignment="RIGHT">
+               <font>
+                  <Font name="Exo 2 Regular" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="killerBirthdayText" alignment="CENTER_RIGHT" prefHeight="9.0" prefWidth="162.0" text="%KILLER_BIRTHDAY" textAlignment="RIGHT">
+               <font>
+                  <Font name="Exo 2 Regular" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="killerHeightText" alignment="CENTER_RIGHT" prefHeight="9.0" prefWidth="162.0" text="%KILLER_HEIGHT" textAlignment="RIGHT">
+               <font>
+                  <Font name="Exo 2 Regular" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="killerWeightText" alignment="CENTER_RIGHT" prefHeight="9.0" prefWidth="162.0" text="%KILLER_WEIGHT" textAlignment="RIGHT">
+               <font>
+                  <Font name="Exo 2 Regular" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="killerXText" alignment="CENTER_RIGHT" prefHeight="9.0" prefWidth="162.0" text="X" textAlignment="RIGHT">
+               <font>
+                  <Font name="Exo 2 Regular" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="killerYText" alignment="CENTER_RIGHT" prefHeight="9.0" prefWidth="162.0" text="Y" textAlignment="RIGHT">
+               <font>
+                  <Font name="Exo 2 Regular" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="killerZText" alignment="CENTER_RIGHT" prefHeight="9.0" prefWidth="162.0" text="Z" textAlignment="RIGHT">
+               <font>
+                  <Font name="Exo 2 Regular" size="18.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets right="5.0" top="6.0" />
+         </padding>
+      </VBox>
+      <VBox fx:id="valuesVBox" layoutX="379.0" layoutY="77.0" maxWidth="220.0" prefHeight="475.0" prefWidth="220.0" spacing="8.0">
+         <children>
+            <Label fx:id="nameValue" prefHeight="22.0" prefWidth="230.0">
+               <font>
+                  <Font name="Exo 2 Regular" size="17.0" />
+               </font>
+            </Label>
+            <Label prefHeight="22.0" prefWidth="230.0" fx:id="xValue">
+               <font>
+                  <Font name="Exo 2 Regular" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="yValue" prefHeight="22.0" prefWidth="230.0">
+               <font>
+                  <Font name="Exo 2 Regular" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="ageValue" prefHeight="22.0" prefWidth="230.0">
+               <font>
+                  <Font name="Exo 2 Regular" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="speakingValue" prefHeight="22.0" prefWidth="230.0">
+               <font>
+                  <Font name="Exo 2 Regular" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="colorValue" prefHeight="22.0" prefWidth="230.0">
+               <font>
+                  <Font name="Exo 2 Regular" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="characterValue" prefHeight="22.0" prefWidth="230.0">
+               <font>
+                  <Font name="Exo 2 Regular" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="killerValue" prefHeight="22.0" prefWidth="230.0">
+               <font>
+                  <Font name="Exo 2 Regular" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="killerNameValue" prefHeight="22.0" prefWidth="230.0">
+               <font>
+                  <Font name="Exo 2 Regular" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="killerBirthdayValue" prefHeight="22.0" prefWidth="230.0">
+               <font>
+                  <Font name="Exo 2 Regular" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="killerHeightValue" prefHeight="22.0" prefWidth="230.0">
+               <font>
+                  <Font name="Exo 2 Regular" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="killerWeightValue" prefHeight="22.0" prefWidth="230.0">
+               <font>
+                  <Font name="Exo 2 Regular" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="killerXValue" prefHeight="22.0" prefWidth="230.0">
+               <font>
+                  <Font name="Exo 2 Regular" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="killerYValue" prefHeight="22.0" prefWidth="230.0">
+               <font>
+                  <Font name="Exo 2 Regular" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="killerZValue" prefHeight="22.0" prefWidth="230.0">
+               <font>
+                  <Font name="Exo 2 Regular" size="17.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets top="7.0" />
+         </padding>
+      </VBox>
+      <VBox fx:id="updateVBox" layoutX="379.0" layoutY="80.0" prefHeight="509.0" prefWidth="207.0" spacing="8.0" visible="false">
+         <padding>
+            <Insets top="3.0" />
+         </padding>
+         <children>
+            <TextField fx:id="name" styleClass="green_bordered_text_field" />
+            <TextField styleClass="green_bordered_text_field" fx:id="x" />
+            <TextField fx:id="y" styleClass="green_bordered_text_field" />
+            <TextField fx:id="age" styleClass="green_bordered_text_field" />
+            <CheckBox fx:id="speaking" mnemonicParsing="false">
+               <font>
+                  <Font name="Exo 2 Regular" size="19.0" />
+               </font>
+            </CheckBox>
+            <ChoiceBox fx:id="color" prefHeight="30.0" prefWidth="154.0" />
+            <ChoiceBox fx:id="character" prefHeight="28.0" prefWidth="154.0" styleClass="green_bordered_text_field" />
+            <CheckBox fx:id="killer" mnemonicParsing="false">
+               <font>
+                  <Font name="Exo 2 Regular" size="19.0" />
+               </font>
+            </CheckBox>
+            <TextField fx:id="killerName" styleClass="green_bordered_text_field" />
+            <TextField fx:id="killerBirthday" styleClass="green_bordered_text_field" />
+            <TextField fx:id="killerHeight" styleClass="green_bordered_text_field" />
+            <TextField fx:id="killerWeight" styleClass="green_bordered_text_field" />
+            <TextField fx:id="killerX" prefHeight="24.0" prefWidth="154.0" styleClass="green_bordered_text_field" />
+            <TextField fx:id="killerY" prefHeight="24.0" prefWidth="154.0" styleClass="green_bordered_text_field" />
+            <TextField fx:id="killerZ" prefHeight="24.0" prefWidth="154.0" styleClass="green_bordered_text_field" />
+         </children>
+      </VBox>
+      <Label alignment="CENTER" layoutX="14.0" layoutY="85.0" prefHeight="27.0" prefWidth="200.0" text="%AUTHOR" textAlignment="RIGHT">
+         <font>
+            <Font name="Exo 2 Regular" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="authorValue" alignment="CENTER" layoutX="14.0" layoutY="112.0" prefHeight="25.0" prefWidth="200.0" text="Text">
+         <font>
+            <Font name="Exo 2 Regular" size="17.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="14.0" layoutY="158.0" prefHeight="25.0" prefWidth="200.0" text="%CREATION_DATE" textAlignment="RIGHT">
+         <font>
+            <Font name="Exo 2 Regular" size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="creationDateValue" alignment="CENTER" layoutX="4.0" layoutY="195.0" prefHeight="26.0" prefWidth="220.0" text="Text" />
+   </children>
+</AnchorPane>
